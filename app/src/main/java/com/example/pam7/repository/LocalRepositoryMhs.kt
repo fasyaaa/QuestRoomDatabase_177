@@ -30,5 +30,4 @@ class LocalRepositoryMhs(private val mahasiswaDao: MahasiswaDao ): RepositoryMhs
     override suspend fun updateMHs(mahasiswa: Mahasiswa) {
         return (mahasiswaDao.updateMahasiswa(mahasiswa))
     }
-
 }
