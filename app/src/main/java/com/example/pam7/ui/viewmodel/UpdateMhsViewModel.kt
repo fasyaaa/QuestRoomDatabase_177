@@ -77,4 +77,7 @@ class UpdateMhsViewModel (
         }
     }
 
+    fun resetSnackBarMessage(){
+
+    }
 }
