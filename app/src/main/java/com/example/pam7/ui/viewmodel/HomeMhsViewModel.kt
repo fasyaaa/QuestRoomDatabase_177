@@ -1,7 +1,10 @@
 package com.example.pam7.ui.viewmodel
 
+import androidx.compose.runtime.Composable
+import androidx.compose.ui.Modifier
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
+import androidx.lifecycle.viewmodel.compose.viewModel
 import com.example.pam7.data.entity.Mahasiswa
 import com.example.pam7.repository.RepositoryMhs
 import kotlinx.coroutines.delay
@@ -50,3 +53,13 @@ data class HomeUiState(
     val isError: Boolean = false,
     val errorMessage: String = ""
 )
+
+@Composable
+fun HomeMhsViewModel(
+    viewModel: HomeMhsViewModel = viewModel(factory = PenyediaViewModel.Factory),
+    onAddMhs: () -> Unit,
+    onDetailClick: (String) -> Unit,
+    modifier: Modifier = Modifier
+){
+
+}
