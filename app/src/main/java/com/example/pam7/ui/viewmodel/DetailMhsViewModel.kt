@@ -3,6 +3,7 @@ package com.example.pam7.ui.viewmodel
 import androidx.lifecycle.SavedStateHandle
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
+import com.example.pam7.data.entity.Mahasiswa
 import com.example.pam7.repository.RepositoryMhs
 import com.example.pam7.ui.navigation.DestinasiDetail
 import kotlinx.coroutines.delay
@@ -74,3 +75,15 @@ data class DetailUiState(
         get() = detailUiEvent != MahasiswaEvent()
 }
 // Data class untuk menampung data yang akan ditampilkan di UI
+
+// Memindahkan data dari entity ke ui
+fun Mahasiswa.toDetailUiEvent(): MahasiswaEvent{
+    return  MahasiswaEvent(
+        nim = nim,
+        nama = nama,
+        jenisKelamin = jenisKelamin,
+        alamat = alamat,
+        kelas = kelas,
+        angkatan = angkatan
+    )
+}
