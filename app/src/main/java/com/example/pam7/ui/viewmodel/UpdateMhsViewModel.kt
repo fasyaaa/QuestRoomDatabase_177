@@ -6,6 +6,7 @@ import androidx.compose.runtime.setValue
 import androidx.lifecycle.SavedStateHandle
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
+import com.example.pam7.data.entity.Mahasiswa
 import com.example.pam7.repository.RepositoryMhs
 import com.example.pam7.ui.navigation.DestinasiUpdate
 import kotlinx.coroutines.flow.filterNotNull
@@ -82,3 +83,6 @@ class UpdateMhsViewModel (
     }
 }
 
+fun Mahasiswa.toUiStateMhs(): MhsUIState = MhsUIState(
+    mahasiswaEvent = this.toDetailUiEvent()
+)
