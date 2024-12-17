@@ -28,7 +28,7 @@ class UpdateMhsViewModel (
             updateUIState = repositoryMhs.getMhs(_nim)
                 .filterNotNull()
                 .first()
-                .toUIStateMhs()
+                .toUiStateMhs()
         }
     }
 
