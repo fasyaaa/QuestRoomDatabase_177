@@ -10,7 +10,7 @@ interface RepositoryMhs {
     suspend fun insertMhs(mahasiswa: Mahasiswa)
 
 //    Operasi memanggil dari MahasiswaDao untuk dapat semua aliran data (Flow)
-    fun getALlMhs(): Flow<List<Mahasiswa>>
+    fun getAllMhs(): Flow<List<Mahasiswa>>
 
     fun getMhs(nim: String): Flow<Mahasiswa>
 
