@@ -27,7 +27,7 @@ class LocalRepositoryMhs(private val mahasiswaDao: MahasiswaDao ): RepositoryMhs
     }
 
 //    Metode ini menggunakan fungsi updateMahasiswa dari Mahas iswaDao untuk memperbarui data mahasiswa di database.
-    override suspend fun updateMHs(mahasiswa: Mahasiswa) {
+    override suspend fun updateMhs(mahasiswa: Mahasiswa) {
         return (mahasiswaDao.updateMahasiswa(mahasiswa))
     }
 }
