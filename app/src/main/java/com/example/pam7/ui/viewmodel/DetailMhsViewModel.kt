@@ -19,7 +19,7 @@ import kotlinx.coroutines.launch
 class DetailMhsViewModel (
     savedStateHandle: SavedStateHandle,
     private val repositoryMhs: RepositoryMhs
-): ViewModel() {
+) : ViewModel(){
     private val _nim: String = checkNotNull(savedStateHandle[DestinasiDetail.NIM])
 
     val detailUiState: StateFlow<DetailUiState> = repositoryMhs.getMhs(_nim)
@@ -31,9 +31,7 @@ class DetailMhsViewModel (
             )
         }
         .onStart {
-            emit(
-                DetailUiState(isLoading = true)
-            )
+            emit(DetailUiState(isLoading = true))
             delay(600)
         }
         .catch {
@@ -50,7 +48,7 @@ class DetailMhsViewModel (
             started = SharingStarted.WhileSubscribed(2000),
             initialValue = DetailUiState(
                 isLoading = true
-            )
+            ),
         )
 
     fun deleteMhs(){
@@ -69,15 +67,15 @@ data class DetailUiState(
     val errorMessage: String = ""
 ){
     val isUiEventEmpty: Boolean
-        get() = detailUiEvent == MahasiswaEvent()
-
+        get () = detailUiEvent == MahasiswaEvent()
     val isUiEventNotEmpty: Boolean
-        get() = detailUiEvent != MahasiswaEvent()
+        get () = detailUiEvent != MahasiswaEvent()
 }
-// Data class untuk menampung data yang akan ditampilkan di UI
 
-// Memindahkan data dari entity ke ui
-fun Mahasiswa.toDetailUiEvent(): MahasiswaEvent{
+// Data Class untuk menampung data yang akan ditampilkan di UI
+
+// memindahkan data dri entitiy ke ui
+fun Mahasiswa.toDetailUiEvent() : MahasiswaEvent{
     return  MahasiswaEvent(
         nim = nim,
         nama = nama,

@@ -13,14 +13,15 @@ import kotlinx.coroutines.flow.map
 import kotlinx.coroutines.flow.onStart
 import kotlinx.coroutines.flow.stateIn
 
-class HomeMhsViewModel (private val repositoryMhs: RepositoryMhs): ViewModel() {
+class HomeMhsViewModel  (
+    private val repositoryMhs: RepositoryMhs
+) : ViewModel(){
+
     val homeUiState: StateFlow<HomeUiState> = repositoryMhs.getAllMhs()
         .filterNotNull()
         .map {
-            HomeUiState(
-                listMhs = it.toList(),
-                isLoading = false,
-            )
+            HomeUiState(listMhs = it.toList(),
+                isLoading = false)
         }
         .onStart {
             emit(HomeUiState(isLoading = true))
@@ -31,7 +32,7 @@ class HomeMhsViewModel (private val repositoryMhs: RepositoryMhs): ViewModel() {
                 HomeUiState(
                     isLoading = false,
                     isError = true,
-                    errorMessage = it.message ?: "Terjadi kesalahan"
+                    errorMessage = it.message ?: "Terjadi Kesalahan"
                 )
             )
         }
@@ -44,6 +45,7 @@ class HomeMhsViewModel (private val repositoryMhs: RepositoryMhs): ViewModel() {
         )
 }
 
+// state mengubah tampilan
 data class HomeUiState(
     val listMhs: List<Mahasiswa> = listOf(),
     val isLoading: Boolean = false,

@@ -43,15 +43,17 @@ import com.example.pam7.ui.viewmodel.toMahasiswaEntity
 fun DetailMhsView(
     modifier: Modifier = Modifier,
     viewModel: DetailMhsViewModel = viewModel(factory = PenyediaViewModel.Factory),
-    onBack: () -> Unit = { },
-    onEditClick: (String) -> Unit = { },
-    onDeleteClick: () -> Unit = { }
+    onBack: () -> Unit,
+    onEditClick: (String) -> Unit,
+    onDeleteClick: () -> Unit
 ) {
-    Scaffold(topBar = {
+    Scaffold(
+        topBar = {
         TopAppBar(
             judul = "Detail Mahasiswa",
             showBackButton = true,
             onBack = onBack,
+            modifier = Modifier
         )
     },
         floatingActionButton = {

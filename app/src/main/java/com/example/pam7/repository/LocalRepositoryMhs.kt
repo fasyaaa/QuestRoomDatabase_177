@@ -11,6 +11,16 @@ class LocalRepositoryMhs(private val mahasiswaDao: MahasiswaDao ): RepositoryMhs
 
     }
 
+//    Metode ini memanfaatkan fungsi de leteMahasiswa dari MahasiswaDao untuk menghapus data mahasiswa.
+    override suspend fun deleteMhs(mahasiswa: Mahasiswa) {
+        mahasiswaDao.deleteMahasiswa(mahasiswa)
+    }
+
+//    Metode ini menggunakan fungsi updateMahasiswa dari Mahas iswaDao untuk memperbarui data mahasiswa di database.
+    override suspend fun updateMhs(mahasiswa: Mahasiswa) {
+        mahasiswaDao.updateMahasiswa(mahasiswa)
+    }
+
 //    Metode ini memanggil fungsi getAllMahasiswa dari MahasiswaDao untuk mendapatkan semua data mahasiswa dalam bentuk aliran data (Flow).
     override fun getAllMhs(): Flow<List<Mahasiswa>> {
         return (mahasiswaDao.getAllMahasiswa())
@@ -19,15 +29,5 @@ class LocalRepositoryMhs(private val mahasiswaDao: MahasiswaDao ): RepositoryMhs
 //    Metode ini memanggil fungsi getMahas iswa dari MahasiswaDao untuk mengambil data mahasiswa berdasarkan NIM.
     override fun getMhs(nim: String): Flow<Mahasiswa> {
         return (mahasiswaDao.getMahasiswa(nim))
-    }
-
-//    Metode ini memanfaatkan fungsi de leteMahasiswa dari MahasiswaDao untuk menghapus data mahasiswa.
-    override suspend fun deleteMhs(mahasiswa: Mahasiswa) {
-        return (mahasiswaDao.deleteMahasiswa(mahasiswa))
-    }
-
-//    Metode ini menggunakan fungsi updateMahasiswa dari Mahas iswaDao untuk memperbarui data mahasiswa di database.
-    override suspend fun updateMhs(mahasiswa: Mahasiswa) {
-        return (mahasiswaDao.updateMahasiswa(mahasiswa))
     }
 }

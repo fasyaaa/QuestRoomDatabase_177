@@ -22,7 +22,7 @@ abstract class KrsDatabase: RoomDatabase(){
             return (Instance ?: synchronized(this){
 //                membuat database
                 Room.databaseBuilder(
-                    context.applicationContext,
+                    context,
                     KrsDatabase::class.java, //Class database
                     "KrsDatabase" //Nama Database
                 )

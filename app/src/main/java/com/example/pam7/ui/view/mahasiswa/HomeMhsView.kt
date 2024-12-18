@@ -1,6 +1,7 @@
 package com.example.pam7.ui.view.mahasiswa
 
 import androidx.compose.foundation.layout.Box
+import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxSize
@@ -57,6 +58,7 @@ fun HomeMhsView(
                 judul = "Daftar Mahasiswa",
                 showBackButton = false,
                 onBack = {},
+                modifier = Modifier
                 )
         },
         floatingActionButton = {
@@ -69,8 +71,6 @@ fun HomeMhsView(
                     imageVector = Icons.Default.Add,
                     contentDescription = "Tambah Mahasiswa",
                 )
-
-
             }
         }
     ){
@@ -106,7 +106,7 @@ fun BodyHomeMhsView(
         }
         homeUiState.isError -> {
 //            Menampilkan pesan error
-            LaunchedEffect(homeUiState) {
+            LaunchedEffect(homeUiState.errorMessage) {
                 homeUiState.errorMessage?.let { message ->
                     coroutineScope.launch {
                         snackbarHostState.showSnackbar(message) //Tampilkan Snackbar
@@ -114,7 +114,7 @@ fun BodyHomeMhsView(
                 }
             }
         }
-        homeUiState.listMhs.isNotEmpty() -> {
+        homeUiState.listMhs.isEmpty() -> {
 //            Menampilkan pesan jika data kosong
             Box(
                 modifier = modifier.fillMaxSize(),
@@ -153,8 +153,7 @@ fun ListMahasiswa(
     ) {
         items(
             items = listMhs,
-            itemContent = {
-                    mhs ->
+            itemContent = { mhs ->
                 CardMhs(
                     mhs = mhs,
                     onClick = { onClick(mhs.nim)}
@@ -176,34 +175,43 @@ fun CardMhs(
         onClick = onClick,
         modifier = modifier.fillMaxWidth().padding(8.dp)
     ) {
-        Row (modifier = Modifier.fillMaxWidth(),
-            verticalAlignment = Alignment.CenterVertically){
-            Icon(imageVector = Icons.Filled.Person, contentDescription = "")
-            Spacer(modifier = Modifier.padding(4.dp))
-            Text(
-                text = mhs.nama,
-                fontWeight = FontWeight.Bold,
-                fontSize = 20.sp
-            )
-        }
-        Row (modifier = Modifier.fillMaxWidth(),
-            verticalAlignment = Alignment.CenterVertically){
-            Icon(imageVector = Icons.Filled.DateRange, contentDescription = "")
-            Spacer(modifier = Modifier.padding(4.dp))
-            Text(
-                text =  mhs.nim,
-                fontWeight = FontWeight.Bold,
-                fontSize = 20.sp
-            )
-        }
-        Row (modifier = Modifier.fillMaxWidth(),
-            verticalAlignment = Alignment.CenterVertically){
-            Icon(imageVector = Icons.Filled.Home, contentDescription = "")
-            Spacer(modifier = Modifier.padding(4.dp))
-            Text(
-                text =  mhs.kelas,
-                fontWeight = FontWeight.Bold,
-            )
+        Column (modifier = Modifier.padding(12.dp)
+        ){
+            Row(
+                modifier = Modifier.fillMaxWidth(),
+                verticalAlignment = Alignment.CenterVertically
+            ) {
+                Icon(imageVector = Icons.Filled.Person, contentDescription = "")
+                Spacer(modifier = Modifier.padding(4.dp))
+                Text(
+                    text = mhs.nama,
+                    fontWeight = FontWeight.Bold,
+                    fontSize = 20.sp
+                )
+            }
+            Row(
+                modifier = Modifier.fillMaxWidth(),
+                verticalAlignment = Alignment.CenterVertically
+            ) {
+                Icon(imageVector = Icons.Filled.DateRange, contentDescription = "")
+                Spacer(modifier = Modifier.padding(4.dp))
+                Text(
+                    text = mhs.nim,
+                    fontWeight = FontWeight.Bold,
+                    fontSize = 20.sp
+                )
+            }
+            Row(
+                modifier = Modifier.fillMaxWidth(),
+                verticalAlignment = Alignment.CenterVertically
+            ) {
+                Icon(imageVector = Icons.Filled.Home, contentDescription = "")
+                Spacer(modifier = Modifier.padding(4.dp))
+                Text(
+                    text = mhs.kelas,
+                    fontWeight = FontWeight.Bold,
+                )
+            }
         }
     }
 }
